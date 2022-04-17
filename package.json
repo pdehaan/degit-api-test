@@ -12,8 +12,9 @@
   "license": "MPL-2.0",
   "dependencies": {
     "degit": "^2.8.4",
-    "del": "^6.0.0",
-    "fast-glob": "^3.2.11",
+    "fast-glob": "^3.2.11"
+  },
+  "devDependencies": {
     "fs-extra": "^10.1.0"
   }
 }

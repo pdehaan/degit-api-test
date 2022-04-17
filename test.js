@@ -1,36 +1,30 @@
+const fse = require("fs-extra");
+
 const cloner = require("./index");
+
+fse.ensureDirSync("data");
 
 cloner(
   "11ty/11ty-community/built-with-eleventy",
-  "data",
-  "sites.json",
   "*.json"
-).then(() => console.log("fetched sites"));
+).then(async (data) => fse.writeJSON("data/sites.json", data));
 
 cloner(
   "11ty/11ty-website/src/_data/starters",
-  "data",
-  "starters.json",
   "*.json"
-).then(() => console.log("fetched starters"));
+).then(async (data) => fse.writeJSON("data/starters.json", data));
 
 cloner(
   "11ty/11ty-website/src/_data/community",
-  "data",
-  "community.json",
   "*.js"
-).then(() => console.log("fetched community"));
+).then(async (data) => fse.writeJSON("data/community.json", data));
 
 cloner(
   "11ty/11ty-website/src/_data/demos",
-  "data",
-  "demos.json",
   "*.js"
-).then(() => console.log("fetched community"));
+).then(async (data) => fse.writeJSON("data/demos.json", data));
 
 cloner(
   "11ty/11ty-website/src/_data/plugins",
-  "data",
-  "plugins.json",
   "*.json"
-).then(() => console.log("fetched plugins"));
+).then(async (data) => fse.writeJSON("data/plugins.json", data));

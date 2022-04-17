@@ -3,11 +3,10 @@ const os = require("node:os");
 const path = require("node:path");
 
 const degit = require("degit");
-const del = require("del");
-const fse = require("fs-extra");
 const glob = require("fast-glob");
 
-async function cloner(repo, destDir, destName, destFileGlob = "*") {
+async function cloner(repo, destFileGlob = "*") {
+  const destDir = repo.split("/").pop();
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), destDir + "_"));
 
   const emitter = degit(repo, {
@@ -20,12 +19,12 @@ async function cloner(repo, destDir, destName, destFileGlob = "*") {
   await emitter.clone(tmpDir);
   const files = await glob(destGlob);
   const data = files.map((file) => {
-    return Object.assign({ _file: path.basename(file) }, require(file));
+    const _file = path.join(repo, path.basename(file));
+    return Object.assign({ _file }, require(file));
   });
   // Delete all the "temp" files.
-  await del(destGlob, { force: true });
-  await fse.ensureDir(destDir);
-  await fse.writeJSON(path.join(destDir, destName), data);
+  await fs.rm(tmpDir, {force: true, recursive: true});
+  return data;
 }
 
 module.exports = cloner;
