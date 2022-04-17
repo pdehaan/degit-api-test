@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test": "node test"
+    "test": "node test.mjs"
   },
   "keywords": [],
   "author": "Peter deHaan <peter@deseloper.com>",

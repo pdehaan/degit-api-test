@@ -23,7 +23,7 @@ async function cloner(repo, destFileGlob = "*") {
     return Object.assign({ _file }, require(file));
   });
   // Delete all the "temp" files.
-  await fs.rm(tmpDir, {force: true, recursive: true});
+  await fs.rm(tmpDir, { force: true, recursive: true });
   return data;
 }
 
